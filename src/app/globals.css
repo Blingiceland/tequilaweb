@@ -1,26 +1,131 @@
 @import "tailwindcss";
 
+@theme {
+  --color-lounge-primary: #2C1A1D;
+  --color-lounge-secondary: #D4AF37;
+  --color-lounge-accent: #1A1A1A;
+  --color-lounge-text: #EADDCD;
+  --color-lounge-highlight: #B87333;
+
+  --color-vampire-primary: #050002;
+  --color-vampire-secondary: #ff0000;
+  --color-vampire-accent: #FF00FF;
+  --color-vampire-text: #F8F8FF;
+  --color-vampire-highlight: #9D00FF;
+
+  /* Semantic colors that switch based on theme */
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-text-main: var(--text-main);
+  --color-highlight: var(--highlight);
+
+  --font-display: var(--font-cinzel), serif;
+  --font-vampire: var(--font-nosifer), cursive;
+  --font-sans: var(--font-inter), sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Default to Lounge */
+  --primary: var(--color-lounge-primary);
+  --secondary: var(--color-lounge-secondary);
+  --accent: var(--color-lounge-accent);
+  --text-main: var(--color-lounge-text);
+  --highlight: var(--color-lounge-highlight);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+[data-theme='vampire'] {
+  --primary: var(--color-vampire-primary);
+  --secondary: var(--color-vampire-secondary);
+  --accent: var(--color-vampire-accent);
+  --text-main: var(--color-vampire-text);
+  --highlight: var(--color-vampire-highlight);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--primary);
+  color: var(--text-main);
+  transition: background-color 2s ease-in-out, color 2s ease-in-out;
+}
+
+@keyframes scanlines {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 4px;
+  }
+}
+
+@keyframes noise {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-5%, -5%);
+  }
+
+  20% {
+    transform: translate(-10%, 5%);
+  }
+
+  30% {
+    transform: translate(5%, -10%);
+  }
+
+  40% {
+    transform: translate(-5%, 15%);
+  }
+
+  50% {
+    transform: translate(-10%, 5%);
+  }
+
+  60% {
+    transform: translate(15%, 0);
+  }
+
+  70% {
+    transform: translate(0, 10%);
+  }
+
+  80% {
+    transform: translate(-15%, 0);
+  }
+
+  90% {
+    transform: translate(10%, 5%);
+  }
+}
+
+@keyframes tracking {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-scanlines {
+  animation: scanlines 0.8s linear infinite;
+}
+
+.animate-noise {
+  animation: noise 0.5s steps(1) infinite;
+}
+
+.animate-tracking {
+  animation: tracking 7s linear infinite;
 }
