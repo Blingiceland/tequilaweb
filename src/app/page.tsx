@@ -10,16 +10,12 @@ import VhsOverlay from "@/components/effects/VhsOverlay";
 import BloodDrip from "@/components/effects/BloodDrip";
 import BloodyCursor from "@/components/effects/BloodyCursor";
 import SpookyAudio from "@/components/effects/SpookyAudio";
-import AudioControl, { SoundProfile } from "@/components/effects/AudioControl";
-import GlitchText from "@/components/effects/GlitchText";
 import NeonSign from "@/components/effects/NeonSign";
 
 export default function Home() {
   const { theme, toggleTheme, isManualOverride } = useTheme();
 
-  // Audio State
-  const [isMuted, setIsMuted] = useState(false);
-  const [soundProfile, setSoundProfile] = useState<SoundProfile>("random");
+
 
   const isLounge = theme === "lounge";
 
@@ -35,13 +31,7 @@ export default function Home() {
       <VhsOverlay />
       <BloodDrip />
       <BloodyCursor />
-      <AudioControl
-        isMuted={isMuted}
-        onMuteToggle={setIsMuted}
-        currentProfile={soundProfile}
-        onProfileChange={setSoundProfile}
-      />
-      <SpookyAudio isMuted={isMuted} profile={soundProfile} />
+      <SpookyAudio isMuted={false} profile="drone" />
       <main className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden transition-colors duration-[2000ms]">
         {/* Background Ambience */}
         <div className="absolute inset-0 pointer-events-none">
@@ -77,9 +67,9 @@ export default function Home() {
                   className="text-6xl md:text-8xl font-serif tracking-widest text-[var(--color-lounge-text)]"
                   style={{ fontFamily: 'var(--font-cinzel)' }}
                 >
-                  TEQUILA
+                  Pablo's
                   <span className="block text-4xl md:text-6xl mt-4 tracking-widest font-light opacity-80">
-                    LOUNGE
+                    Tequila Bar
                   </span>
                 </motion.h1>
               ) : (
@@ -110,16 +100,7 @@ export default function Home() {
                   "A hidden sanctuary behind the wooden door. Fine spirits, hushed conversations, and the warmth of old leather."
                 </motion.p>
               ) : (
-                <motion.p
-                  key="vampire-desc"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="text-xl md:text-2xl font-bold uppercase tracking-widest text-[#d946ef] drop-shadow-[0_0_10px_rgba(217,70,239,0.8)]"
-                  style={{ fontFamily: 'var(--font-nosifer)' }}
-                >
-                  "Enter at your own risk. The night is young, and we are thirsty."
-                </motion.p>
+                null
               )}
             </AnimatePresence>
           </div>
@@ -136,18 +117,13 @@ export default function Home() {
                 : 'bg-red-950/80 text-red-500 border border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.4)] hover:text-red-400 hover:border-red-400 hover:shadow-red-500/50'
               }
             `}
-            style={{ fontFamily: isLounge ? 'var(--font-cinzel)' : 'var(--font-nosifer)' }}
+            style={{ fontFamily: isLounge ? 'var(--font-cinzel)' : 'sans-serif' }}
           >
             {isLounge ? "RESERVE A TABLE" : "JOIN THE RITUAL"}
           </motion.button>
         </div>
 
-        {/* Decorative Elements */}
-        <div className="absolute bottom-10 left-0 right-0 text-center opacity-50 z-20 pointer-events-none">
-          <p className="text-sm">{isLounge ? "Open until midnight." : "Open until dawn."}</p>
-          <p className="text-xs mt-2 animate-bounce">Scroll down</p>
-          {isManualOverride && <p className="text-[10px] mt-2 opacity-50 uppercase">(Manual Time Override Active)</p>}
-        </div>
+
 
       </main>
 

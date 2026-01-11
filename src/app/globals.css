@@ -12,6 +12,7 @@
   --color-vampire-accent: #FF00FF;
   --color-vampire-text: #F8F8FF;
   --color-vampire-highlight: #9D00FF;
+  --color-vampire-green: #39ff14;
 
   /* Semantic colors that switch based on theme */
   --color-primary: var(--primary);

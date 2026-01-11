@@ -2,6 +2,7 @@
 
 import { useTheme } from "@/context/ThemeContext";
 import { motion } from "framer-motion";
+import BleedingHeader from "./effects/BleedingHeader";
 
 interface Drink {
     name: string;
@@ -223,11 +224,19 @@ export default function CocktailMenu() {
 
             {/* ELIXIRS SECTION */}
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mb-24">
-                <h2 className={`text-4xl md:text-5xl text-center mb-12 font-bold 
-            ${isLounge ? 'font-serif text-[var(--color-lounge-text)]' : 'font-[family-name:var(--font-nosifer)] text-[var(--color-vampire-secondary)] tracking-widest'}`}
-                >
-                    {isLounge ? "Signatures" : "ELIXIRS"}
-                </h2>
+                <div className="text-center mb-12">
+                    {isLounge ? (
+                        <h2 className="text-4xl md:text-5xl font-bold font-serif text-[var(--color-lounge-text)]">
+                            Signatures
+                        </h2>
+                    ) : (
+                        <BleedingHeader>
+                            <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-nosifer)] text-[var(--color-vampire-secondary)] tracking-widest bg-transparent">
+                                ELIXIRS
+                            </h2>
+                        </BleedingHeader>
+                    )}
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {ELIXIRS.map((drink, index) => (
@@ -257,11 +266,19 @@ export default function CocktailMenu() {
 
             {/* TEQUILA LIBRARY SECTION */}
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mb-24">
-                <h2 className={`text-3xl md:text-4xl text-center mb-12 font-bold 
-            ${isLounge ? 'font-serif text-[var(--color-lounge-text)]' : 'font-[family-name:var(--font-nosifer)] text-[var(--color-vampire-highlight)] tracking-widest'}`}
-                >
-                    {isLounge ? "Tequila Library" : "FORBIDDEN STOCKS"}
-                </h2>
+                <div className="text-center mb-12">
+                    {isLounge ? (
+                        <h2 className="text-3xl md:text-4xl font-bold font-serif text-[var(--color-lounge-text)]">
+                            Tequila Library
+                        </h2>
+                    ) : (
+                        <BleedingHeader dripColor="#d946ef">
+                            <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-nosifer)] text-[#d946ef] tracking-widest">
+                                FORBIDDEN STOCKS
+                            </h2>
+                        </BleedingHeader>
+                    )}
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
                     {TEQUILAS.map((drink, index) => (
@@ -290,11 +307,19 @@ export default function CocktailMenu() {
 
             {/* POTIONS SECTION */}
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
-                <h2 className={`text-3xl md:text-4xl text-center mb-12 font-bold 
-            ${isLounge ? 'font-serif text-[var(--color-lounge-text)] opacity-80' : 'font-[family-name:var(--font-nosifer)] text-[var(--color-vampire-accent)] tracking-widest'}`}
-                >
-                    {isLounge ? "Agave Spirits" : "POTIONS"}
-                </h2>
+                <div className="text-center mb-12">
+                    {isLounge ? (
+                        <h2 className="text-3xl md:text-4xl font-bold font-serif text-[var(--color-lounge-text)] opacity-80">
+                            Agave Spirits
+                        </h2>
+                    ) : (
+                        <BleedingHeader dripColor="#39ff14">
+                            <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-nosifer)] text-[var(--color-vampire-green)] tracking-widest">
+                                POTIONS
+                            </h2>
+                        </BleedingHeader>
+                    )}
+                </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {POTIONS.map((drink, index) => (
@@ -315,7 +340,7 @@ export default function CocktailMenu() {
                             <p className={`text-xs mb-2 opacity-70`}>
                                 {isLounge ? drink.description : (drink.vampireDesc || drink.description)}
                             </p>
-                            <span className={`text-sm font-mono ${isLounge ? 'text-[var(--color-lounge-highlight)]' : 'text-[var(--color-vampire-accent)]'}`}>
+                            <span className={`text-sm font-mono ${isLounge ? 'text-[var(--color-lounge-highlight)]' : 'text-[var(--color-vampire-green)]'}`}>
                                 {drink.price}
                             </span>
                         </motion.div>

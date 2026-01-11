@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 // --- Neon Letter (Stable) ---
 interface NeonLetterProps {
@@ -140,10 +141,36 @@ export default function NeonSign() {
 
             {/* Neon Text Container */}
             <div className="relative z-10 text-center">
-                {/* PABLO'S - Purple Neon (Stable) */}
+                {/* Ghost Layer (Cyan/Blue) - Jitters behind */}
+                <motion.div
+                    className="absolute inset-0 z-0 select-none pointer-events-none opacity-60 blur-[1px]"
+                    animate={{
+                        x: [0, -2, 2, -1, 0],
+                        y: [0, 1, -1, 2, 0],
+                        filter: ["blur(1px)", "blur(2px)", "blur(0px)"]
+                    }}
+                    transition={{
+                        duration: 0.2,
+                        repeat: Infinity,
+                        repeatType: "mirror",
+                        ease: "linear",
+                        times: [0, 0.2, 0.4, 0.6, 1] // erratic timing
+                    }}
+                >
+                    <div
+                        className="text-5xl md:text-7xl font-black tracking-widest mb-4 text-[#00ffff]"
+                        style={{ fontFamily: "var(--font-inter), sans-serif", textShadow: "0 0 10px #00ffff" }}
+                    >
+                        {titleText.split("").map((char, i) => (
+                            <span key={`ghost-${i}`} className="inline-block">{char}</span>
+                        ))}
+                    </div>
+                </motion.div>
+
+                {/* Main Layer (Purple) - Stable */}
                 <div
-                    className="text-5xl md:text-7xl font-black tracking-widest mb-4"
-                    style={{ fontFamily: "var(--font-nosifer)" }}
+                    className="relative z-10 text-5xl md:text-7xl font-black tracking-widest mb-4"
+                    style={{ fontFamily: "var(--font-inter), sans-serif" }}
                 >
                     {titleText.split("").map((char, i) => (
                         <NeonLetter key={i} char={char} color="purple" />
