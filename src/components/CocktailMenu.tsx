@@ -12,6 +12,7 @@ interface Drink {
     vampireName?: string;
     vampireDesc?: string;
     image?: string;
+    loungeImage?: string;
 }
 
 const ELIXIRS: Drink[] = [
@@ -21,7 +22,8 @@ const ELIXIRS: Drink[] = [
         price: "2400 ISK",
         vampireName: "The Sanguine Saint",
         vampireDesc: "Tequila infused with blood orange, black salt rim.",
-        image: "/images/The_Sanguine_Saint.png"
+        image: "/images/The_Sanguine_Saint.png",
+        loungeImage: "/images/Classic_Margarita.png"
     },
     {
         name: "Tequila Sunrise",
@@ -29,7 +31,8 @@ const ELIXIRS: Drink[] = [
         price: "2200 ISK",
         vampireName: "Eternal Sunset",
         vampireDesc: "Layered shadows, pomegranate molasses, orange haze.",
-        image: "/images/Eternal_Sunset.png"
+        image: "/images/Eternal_Sunset.png",
+        loungeImage: "/images/Tequila_Sunrise.png"
     },
     {
         name: "Paloma",
@@ -37,7 +40,8 @@ const ELIXIRS: Drink[] = [
         price: "2300 ISK",
         vampireName: "Graveyard Dust",
         vampireDesc: "Mezcal, tart grapefruit, smoked volcanic salt.",
-        image: "/images/Graveyard_Dust.png"
+        image: "/images/Graveyard_Dust.png",
+        loungeImage: "/images/Paloma.png"
     },
     {
         name: "Añejo Old Fashioned",
@@ -45,7 +49,8 @@ const ELIXIRS: Drink[] = [
         price: "2800 ISK",
         vampireName: "Stake Through The Heart",
         vampireDesc: "Extra Añejo, spicy bitters, garnished with a wooden spike.",
-        image: "/images/A_Stake_Through_The_Heart.png"
+        image: "/images/A_Stake_Through_The_Heart.png",
+        loungeImage: "/images/Anejo_Old_Fashioned.png"
     },
     {
         name: "Negroni",
@@ -53,7 +58,8 @@ const ELIXIRS: Drink[] = [
         price: "2600 ISK",
         vampireName: "Crimson Peak",
         vampireDesc: "Smoky and bitter. A Negroni for the immortal.",
-        image: "/images/Crimson_Peak.png"
+        image: "/images/Crimson_Peak.png",
+        loungeImage: "/images/Negroni.png"
     },
     {
         name: "Margarita",
@@ -61,7 +67,8 @@ const ELIXIRS: Drink[] = [
         price: "2400 ISK",
         vampireName: "La Llorona",
         vampireDesc: "Ghost's tears. Salty, dry, and razor sharp.",
-        image: "/images/La_Llorona.png"
+        image: "/images/La_Llorona.png",
+        loungeImage: "/images/Margarita.png"
     },
     {
         name: "Ginger Cocktail",
@@ -69,7 +76,8 @@ const ELIXIRS: Drink[] = [
         price: "2500 ISK",
         vampireName: "Lucifer's Reach",
         vampireDesc: "Spicy ginger bleeding with sweet currants.",
-        image: "/images/Lucifers_Reach.png"
+        image: "/images/Lucifers_Reach.png",
+        loungeImage: "/images/Ginger_Cocktail.png"
     },
     {
         name: "Blackberry Basil",
@@ -77,7 +85,8 @@ const ELIXIRS: Drink[] = [
         price: "2700 ISK",
         vampireName: "Midnight Garden",
         vampireDesc: "Fresh basil and crushed dark blackberries.",
-        image: "/images/Midnight_Garden.png"
+        image: "/images/Midnight_Garden.png",
+        loungeImage: "/images/Blackberry_Basil.png"
     },
 ];
 
@@ -251,10 +260,10 @@ export default function CocktailMenu() {
                                 } transition-all duration-300 hover:scale-105`}
                         >
                             {/* Image */}
-                            {drink.image && (
+                            {(drink.image || drink.loungeImage) && (
                                 <div className="relative w-full aspect-square overflow-hidden">
                                     <Image
-                                        src={drink.image}
+                                        src={isLounge ? (drink.loungeImage || drink.image || "") : (drink.image || "")}
                                         alt={isLounge ? drink.name : (drink.vampireName || drink.name)}
                                         fill
                                         className="object-cover"
