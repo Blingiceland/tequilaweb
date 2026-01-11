@@ -2,7 +2,8 @@
 
 import { useTheme } from "@/context/ThemeContext";
 import { motion } from "framer-motion";
-import BleedingHeader from "./effects/BleedingHeader";
+import NeonMenuHeader from "./effects/NeonMenuHeader";
+import Image from "next/image";
 
 interface Drink {
     name: string;
@@ -10,6 +11,7 @@ interface Drink {
     price: string;
     vampireName?: string;
     vampireDesc?: string;
+    image?: string;
 }
 
 const ELIXIRS: Drink[] = [
@@ -19,6 +21,7 @@ const ELIXIRS: Drink[] = [
         price: "2400 ISK",
         vampireName: "The Sanguine Saint",
         vampireDesc: "Tequila infused with blood orange, black salt rim.",
+        image: "/images/The_Sanguine_Saint.png"
     },
     {
         name: "Tequila Sunrise",
@@ -26,6 +29,7 @@ const ELIXIRS: Drink[] = [
         price: "2200 ISK",
         vampireName: "Eternal Sunset",
         vampireDesc: "Layered shadows, pomegranate molasses, orange haze.",
+        image: "/images/Eternal_Sunset.png"
     },
     {
         name: "Paloma",
@@ -33,6 +37,7 @@ const ELIXIRS: Drink[] = [
         price: "2300 ISK",
         vampireName: "Graveyard Dust",
         vampireDesc: "Mezcal, tart grapefruit, smoked volcanic salt.",
+        image: "/images/Graveyard_Dust.png"
     },
     {
         name: "Añejo Old Fashioned",
@@ -40,48 +45,39 @@ const ELIXIRS: Drink[] = [
         price: "2800 ISK",
         vampireName: "Stake Through The Heart",
         vampireDesc: "Extra Añejo, spicy bitters, garnished with a wooden spike.",
+        image: "/images/A_Stake_Through_The_Heart.png"
     },
     {
-        name: "Espresso Martini",
-        description: "Tequila Reposado, coffee liqueur, fresh espresso.",
+        name: "Negroni",
+        description: "Tequila, Campari, Sweet Vermouth.",
         price: "2600 ISK",
-        vampireName: "Midnight Wake",
-        vampireDesc: "Cold brew, dark cacao, and a drop of adrenaline.",
+        vampireName: "Crimson Peak",
+        vampireDesc: "Smoky and bitter. A Negroni for the immortal.",
+        image: "/images/Crimson_Peak.png"
     },
     {
-        name: "Spicy Margarita",
-        description: "Tequila, jalapeño simple syrup, lime, tajin.",
-        price: "2500 ISK",
-        vampireName: "Diablo's Breath",
-        vampireDesc: "Ghost pepper infused tequila, red chili rim.",
-    },
-    {
-        name: "Oaxaca Negroni",
-        description: "Mezcal, Campari, Sweet Vermouth.",
-        price: "2700 ISK",
-        vampireName: "Blood Pact",
-        vampireDesc: "Bitter red herbs, smoke, and an iron finish.",
-    },
-    {
-        name: "Tequila Cosmo",
-        description: "Blanco, cranberry, lime, triple sec.",
+        name: "Margarita",
+        description: "Tequila, lime, salt.",
         price: "2400 ISK",
-        vampireName: "Crimson Veil",
-        vampireDesc: "Deep red berry reduction, citrus essence.",
+        vampireName: "La Llorona",
+        vampireDesc: "Ghost's tears. Salty, dry, and razor sharp.",
+        image: "/images/La_Llorona.png"
     },
     {
-        name: "Blue Lagoon",
-        description: "Tequila, Blue Curacao, lemonade.",
-        price: "2200 ISK",
-        vampireName: "Spirit Mist",
-        vampireDesc: "Glowing blue tonic, dry ice fog.",
+        name: "Ginger Cocktail",
+        description: "Tequila, ginger, currants.",
+        price: "2500 ISK",
+        vampireName: "Lucifer's Reach",
+        vampireDesc: "Spicy ginger bleeding with sweet currants.",
+        image: "/images/Lucifers_Reach.png"
     },
     {
-        name: "Tommy's Margarita",
-        description: "Tequila, agave nectar, lime juice.",
-        price: "2300 ISK",
-        vampireName: "Venomous Kiss",
-        vampireDesc: "Pure agave venom, sour citrus bite.",
+        name: "Blackberry Basil",
+        description: "Tequila, basil, blackberries.",
+        price: "2700 ISK",
+        vampireName: "Midnight Garden",
+        vampireDesc: "Fresh basil and crushed dark blackberries.",
+        image: "/images/Midnight_Garden.png"
     },
 ];
 
@@ -91,56 +87,64 @@ const POTIONS: Drink[] = [
         description: "Pure Blue Agave, unaged.",
         price: "1500 ISK",
         vampireName: "Holy Water",
-        vampireDesc: "Burns the unworthy.",
+        vampireDesc: "Crystal clear Agave with a hidden inferno. (Spicy)",
+        image: "/images/Holy_Water.png"
     },
     {
         name: "Reposado Shot",
         description: "Rested in oak barrels.",
         price: "1700 ISK",
         vampireName: "Earth's Blood",
-        vampireDesc: "Aged in coffin wood.",
+        vampireDesc: "Oak-aged, deep, and earthy.",
+        image: "/images/The_Antidote.png"
     },
     {
         name: "Añejo Shot",
         description: "Aged 1-3 years.",
         price: "2000 ISK",
         vampireName: "Ancient Rot",
-        vampireDesc: "Dark, decaying sweetness.",
+        vampireDesc: "Thick, black, and herbal-sweet.",
+        image: "/images/Venom.png"
     },
     {
         name: "Coffee Tequila",
         description: "Rich coffee infusion.",
         price: "1600 ISK",
         vampireName: "Coffin Nail",
-        vampireDesc: "Black as night, twice as dead.",
+        vampireDesc: "Jet black Coffee-Agave fusion.",
+        image: "/images/Coffin_Nail.png"
     },
     {
         name: "Chili Tequila",
         description: "Spicy kick.",
         price: "1600 ISK",
         vampireName: "Hellfire",
-        vampireDesc: "Liquid brimstone.",
+        vampireDesc: "Smoked Mezcal and blazing chili heat.",
+        image: "/images/Hellfire.png"
     },
     {
         name: "Mezcal Joven",
         description: "Smoky agave spirit.",
         price: "1800 ISK",
         vampireName: "Smoke & Mirrors",
-        vampireDesc: "Inhaling a bonfire.",
+        vampireDesc: "Pure bonfire smoke and wood.",
+        image: "/images/Smoke_And_Mirrors.png"
     },
     {
         name: "Coconut Tequila",
         description: "Tropical sweetness.",
         price: "1600 ISK",
         vampireName: "Pale Ghost",
-        vampireDesc: "Sweet, white, and vanishing.",
+        vampireDesc: "Ice cold cacao and cream. Dessert for the dead.",
+        image: "/images/Pale_Ghost.png"
     },
     {
         name: "Herbal Shot",
         description: "Secret herbal blend.",
         price: "1900 ISK",
         vampireName: "Viper Bite",
-        vampireDesc: "Green poison, instant paralysis.",
+        vampireDesc: "Electric melon and numbing herbs.",
+        image: "/images/Viper_Bite.png"
     },
 ];
 
@@ -226,45 +230,66 @@ export default function CocktailMenu() {
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mb-24">
                 <div className="text-center mb-12">
                     {isLounge ? (
-                        <h2 className="text-4xl md:text-5xl font-bold font-serif text-[var(--color-lounge-text)]">
-                            Signatures
+                        <h2 className="text-3xl md:text-4xl font-bold font-serif text-[var(--color-lounge-text)]">
+                            Today's Signatures
                         </h2>
                     ) : (
-                        <BleedingHeader>
-                            <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-nosifer)] text-[var(--color-vampire-secondary)] tracking-widest bg-transparent">
-                                ELIXIRS
-                            </h2>
-                        </BleedingHeader>
+                        <NeonMenuHeader text="TODAY'S ELIXIRS" color="red" />
                     )}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {ELIXIRS.map((drink, index) => (
                         <motion.div
                             key={`elixir-${index}`}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.05 }}
-                            className={containerClass}
+                            transition={{ delay: index * 0.1 }}
+                            className={`group relative overflow-hidden rounded-lg ${isLounge
+                                ? 'bg-[var(--color-lounge-secondary)] border border-[var(--color-lounge-accent)]'
+                                : 'bg-zinc-950/80 border border-zinc-800 hover:border-[var(--color-vampire-secondary)]'
+                                } transition-all duration-300 hover:scale-105`}
                         >
-                            <div className="flex justify-between items-baseline mb-2">
-                                <h3 className={`text-xl font-bold ${!isLounge && 'uppercase tracking-wider text-[var(--color-vampire-secondary)]'}`}>
-                                    {isLounge ? drink.name : (drink.vampireName || drink.name)}
-                                </h3>
-                                <span className={`text-lg opacity-80 whitespace-nowrap ml-4 ${!isLounge && 'text-[var(--color-vampire-accent)] font-mono'}`}>
-                                    {drink.price}
-                                </span>
+                            {/* Image */}
+                            {drink.image && (
+                                <div className="relative w-full aspect-square overflow-hidden">
+                                    <Image
+                                        src={drink.image}
+                                        alt={isLounge ? drink.name : (drink.vampireName || drink.name)}
+                                        fill
+                                        className="object-cover"
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                                    />
+                                </div>
+                            )}
+
+                            {/* Content */}
+                            <div className="p-4">
+                                <div className="flex justify-between items-baseline mb-2">
+                                    <h3 className={`text-lg font-bold ${!isLounge && 'uppercase tracking-wider text-[var(--color-vampire-secondary)]'
+                                        }`}>
+                                        {isLounge ? drink.name : (drink.vampireName || drink.name)}
+                                    </h3>
+                                    <span className={`text-sm opacity-80 whitespace-nowrap ml-2 ${!isLounge && 'text-[var(--color-vampire-accent)] font-mono'
+                                        }`}>
+                                        {drink.price}
+                                    </span>
+                                </div>
+                                <div className={`h-px w-full my-2 ${isLounge ? 'bg-[var(--color-lounge-highlight)] opacity-30' : 'bg-gradient-to-r from-[var(--color-vampire-secondary)] to-transparent'
+                                    }`} />
+                                <p className={`text-xs opacity-90 ${isLounge ? 'font-light italic' : 'font-bold tracking-wide'
+                                    }`}>
+                                    {isLounge ? drink.description : (drink.vampireDesc || drink.description)}
+                                </p>
                             </div>
-                            <div className={`h-px w-full my-2 ${isLounge ? 'bg-[var(--color-lounge-highlight)] opacity-30' : 'bg-gradient-to-r from-[var(--color-vampire-secondary)] to-transparent'}`} />
-                            <p className={`text-sm opacity-90 ${isLounge ? 'font-light italic' : 'font-bold tracking-wide'}`}>
-                                {isLounge ? drink.description : (drink.vampireDesc || drink.description)}
-                            </p>
                         </motion.div>
                     ))}
                 </div>
             </motion.div>
 
-            {/* TEQUILA LIBRARY SECTION */}
+            {/* TEQUILA LIBRARY SECTION - TEMPORARILY REMOVED */}
+            {/* User will add comprehensive tequila list later */}
+            {/*
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mb-24">
                 <div className="text-center mb-12">
                     {isLounge ? (
@@ -304,6 +329,8 @@ export default function CocktailMenu() {
                     ))}
                 </div>
             </motion.div>
+            */}
+
 
             {/* POTIONS SECTION */}
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
@@ -313,36 +340,54 @@ export default function CocktailMenu() {
                             Agave Spirits
                         </h2>
                     ) : (
-                        <BleedingHeader dripColor="#39ff14">
-                            <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-nosifer)] text-[var(--color-vampire-green)] tracking-widest">
-                                POTIONS
-                            </h2>
-                        </BleedingHeader>
+                        <NeonMenuHeader text="POTIONS" color="green" />
                     )}
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
                     {POTIONS.map((drink, index) => (
                         <motion.div
                             key={`potion-${index}`}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: index * 0.05 }}
-                            className={`p-4 text-center border transition-all duration-300 rounded-sm
-                ${isLounge
-                                    ? 'border-[var(--color-lounge-accent)] hover:border-[var(--color-lounge-highlight)]'
-                                    : 'border-zinc-800 hover:border-[var(--color-vampire-secondary)] bg-zinc-950/80 hover:scale-105'
-                                }`}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            className={`group relative overflow-hidden rounded-lg ${isLounge
+                                ? 'bg-[var(--color-lounge-secondary)] border border-[var(--color-lounge-accent)]'
+                                : 'bg-zinc-950/80 border border-zinc-800 hover:border-[var(--color-vampire-green)]'
+                                } transition-all duration-300 hover:scale-105`}
                         >
-                            <h3 className={`font-bold mb-1 ${!isLounge && 'text-[var(--color-vampire-text)] uppercase text-sm'}`}>
-                                {isLounge ? drink.name : (drink.vampireName || drink.name)}
-                            </h3>
-                            <p className={`text-xs mb-2 opacity-70`}>
-                                {isLounge ? drink.description : (drink.vampireDesc || drink.description)}
-                            </p>
-                            <span className={`text-sm font-mono ${isLounge ? 'text-[var(--color-lounge-highlight)]' : 'text-[var(--color-vampire-green)]'}`}>
-                                {drink.price}
-                            </span>
+                            {/* Image */}
+                            {drink.image && (
+                                <div className="relative w-full aspect-square overflow-hidden">
+                                    <Image
+                                        src={drink.image}
+                                        alt={isLounge ? drink.name : (drink.vampireName || drink.name)}
+                                        fill
+                                        className="object-cover"
+                                        sizes="(max-width: 768px) 50vw, 25vw"
+                                    />
+                                </div>
+                            )}
+
+                            {/* Content */}
+                            <div className="p-4">
+                                <div className="flex justify-between items-baseline mb-2">
+                                    <h3 className={`text-base font-bold ${!isLounge && 'uppercase tracking-wider text-[var(--color-vampire-green)]'
+                                        }`}>
+                                        {isLounge ? drink.name : (drink.vampireName || drink.name)}
+                                    </h3>
+                                    <span className={`text-xs opacity-80 whitespace-nowrap ml-2 ${!isLounge && 'text-[var(--color-vampire-green)] font-mono'
+                                        }`}>
+                                        {drink.price}
+                                    </span>
+                                </div>
+                                <div className={`h-px w-full my-2 ${isLounge ? 'bg-[var(--color-lounge-highlight)] opacity-30' : 'bg-gradient-to-r from-[var(--color-vampire-green)] to-transparent'
+                                    }`} />
+                                <p className={`text-xs opacity-90 ${isLounge ? 'font-light italic' : 'font-bold tracking-wide'
+                                    }`}>
+                                    {isLounge ? drink.description : (drink.vampireDesc || drink.description)}
+                                </p>
+                            </div>
                         </motion.div>
                     ))}
                 </div>
