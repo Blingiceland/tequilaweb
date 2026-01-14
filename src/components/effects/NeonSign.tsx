@@ -125,7 +125,7 @@ function NeonBorderSegment({ position }: NeonBorderSegmentProps) {
 
 // --- Main Component ---
 export default function NeonSign() {
-    const titleText = "PABLO'S";
+    const titleText = "PABLO";
     const subtitleText = "TEQUILA BAR";
 
     return (

@@ -67,7 +67,7 @@ export default function Home() {
                   className="text-6xl md:text-8xl font-serif tracking-widest text-[var(--color-lounge-text)]"
                   style={{ fontFamily: 'var(--font-cinzel)' }}
                 >
-                  Pablo's
+                  Pablo
                   <span className="block text-4xl md:text-6xl mt-4 tracking-widest font-light opacity-80">
                     Tequila Bar
                   </span>
